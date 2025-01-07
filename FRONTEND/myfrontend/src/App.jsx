@@ -1,8 +1,12 @@
-import React from 'react';
-import WordCount from './components/WordCount';
+import React from "react";
 
-function App() {
-    return <WordCount />;
-}
+const App = () => {
+  return (
+    <div>
+      <h1>Welcome to My Auth App</h1>
+      <a href="/register">Register</a> | <a href="/login">Login</a>
+    </div>
+  );
+};
 
 export default App;
