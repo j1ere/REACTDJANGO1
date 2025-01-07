@@ -1,5 +1,5 @@
 import React from 'react';
-import WordCount from './WordCount';
+import WordCount from './components/WordCount';
 
 function App() {
     return <WordCount />;
