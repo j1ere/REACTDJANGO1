@@ -13,10 +13,16 @@ const WordCount = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const token = Cookies.get('jwtToken');//retrieve token from cookies
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/wordcount/",
-        { text }
+        { text },
+        {
+            headers: {
+                Authorization: `Token ${token}`,//include token in headers
+            }, 
+        }
       );
       setWordCount(response.data.word_count);
     } catch (error) {

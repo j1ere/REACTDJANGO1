@@ -11,7 +11,7 @@ import WordCount from "./components/WordCount"
 axios.interceptors.request.use((config) => {
   const token = Cookies.get("jwtToken");
   if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+    config.headers.Authorization = `Token ${token}`;
   }
   return config;
 });

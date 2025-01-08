@@ -19,12 +19,14 @@ const Login = () => {
         data
       );
       const { token } = response.data; // Assuming the token is returned on successful login
-    //   Cookies.set("jwtToken", token, { expires: 7 }); // Store the token as a cookie (valid for 7 days)
-    Cookies.set('jwtToken', token, {
-        expires: 7,        // Valid for 7 days
-        sameSite: 'Lax',   // Adjust to 'Strict' or 'None' based on your app's needs
-        secure: true,      // Use true for HTTPS environments
+      //   Cookies.set("jwtToken", token, { expires: 7 }); // Store the token as a cookie (valid for 7 days)
+      Cookies.set("jwtToken", token, {
+        expires: 7, // Valid for 7 days
+        sameSite: "Lax", // Adjust to 'Strict' or 'None' based on your app's needs
+        secure: true, // Use true for HTTPS environments
       });
+      console.log("Token stored:", Cookies.get("jwtToken"));
+
       alert("Login successful!");
       navigate("/wordcount"); // Redirect to WordCount page
     } catch (error) {
