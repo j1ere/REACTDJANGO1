@@ -1,47 +1,53 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import styles from './WordCount.module.css'
+import React, { useState } from "react";
+import axios from "axios";
+import styles from "./WordCount.module.css";
+import Cookies from "js-cookie";
+
+//add this before sending any axios requests
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFToken";
 
 const WordCount = () => {
-    const [text, setText] = useState('');
-    const [wordCount, setWordCount] = useState(null);
+  const [text, setText] = useState("");
+  const [wordCount, setWordCount] = useState(null);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post('http://127.0.0.1:8000/api/wordcount/', { text });
-            setWordCount(response.data.word_count);
-        } catch (error) {
-            console.error('Error fetching word count:', error);
-        }
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/wordcount/",
+        { text }
+      );
+      setWordCount(response.data.word_count);
+    } catch (error) {
+      console.error("Error fetching word count:", error);
+    }
+  };
 
-    return (
-        <div className={styles.container}>
-            <h1 className={styles.heading}>Word Count Application</h1>
-            <form onSubmit={handleSubmit}>
-                <textarea
-                    className={styles.textarea}
-                    placeholder="Enter your text here..."
-                    value={text}
-                    onChange={(e) => setText(e.target.value)}
-                />
-                <button type="submit" className={styles.button}>
-                    Count Words
-                </button>
-            </form>
-            {wordCount !== null && (
-                <p className={styles.wordCount}>
-                    Word Count: <strong>{wordCount}</strong>
-                </p>
-            )}
-        </div>
-    );
+  return (
+    <div className={styles.container}>
+      <h1 className={styles.heading}>Word Count Application</h1>
+      <form onSubmit={handleSubmit}>
+        <textarea
+          className={styles.textarea}
+          placeholder="Enter your text here..."
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
+        <button type="submit" className={styles.button}>
+          Count Words
+        </button>
+      </form>
+      {wordCount !== null && (
+        <p className={styles.wordCount}>
+          Word Count: <strong>{wordCount}</strong>
+        </p>
+      )}
+    </div>
+  );
 };
 
 export default WordCount;
-
-
 
 // const WordCount = () => {
 //     const [text, setText] = useState('');
